@@ -1,0 +1,37 @@
+@import 'reset';
+@import 'color';
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.tooltip {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+
+    &-text {
+        visibility: hidden;
+        position: absolute;
+        z-index: 1000;
+        top: 120%;
+        padding: 2px;
+        border-radius: 4px;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 10%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent black transparent;
+        }
+    }
+
+    &:hover {
+        .tooltip-text {
+            visibility: visible;
+        }
+    }
+}

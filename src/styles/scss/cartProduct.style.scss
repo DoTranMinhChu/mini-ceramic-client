@@ -1,0 +1,101 @@
+@import 'color';
+
+//========= Cart Product component =========
+
+.card-product {
+    width: 20%;
+
+    &-container {
+        padding: 16px;
+
+        width: 100%;
+        height: 440px;
+
+        &__inner {
+            cursor: pointer;
+
+            transition: all 0.2s;
+
+            border: 2px solid $color_pink_dark;
+            padding: 18px;
+
+            height: 100%;
+
+            .card-product-img-box {
+                width: 100%;
+                height: 60%;
+            }
+
+            .card-product-action-box {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 40%;
+                width: 100%;
+                padding: 12px 2px;
+
+
+                &__name-product-group {
+                    font-size: 16px;
+                    font-weight: 500;
+
+                    margin-bottom: 12px;
+
+                    .card-product-action-box__name-product {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        display: -webkit-box !important;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        white-space: normal;
+                    }
+                }
+
+                &__price-product-group {
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin-bottom: 22px;
+                }
+
+                &__control-btn-group {
+
+                    display: flex;
+                    justify-content: space-between;
+                    align-content: center;
+
+                    &--sold {
+                        text-align: center;
+                        margin: auto 0;
+                        font-size: 16px;
+                    }
+
+                    &--cart {
+                        cursor: pointer;
+                        color: $color_pink_dark;
+                        font-size: 28px;
+
+                        &:hover {
+                            color: $color_pink_dark_opacity;
+                        }
+                    }
+                }
+            }
+
+            &:hover{
+                transform: translateY(-0.5%);
+            }
+        }
+    }
+
+    .tooltip-text {
+        line-height: 1.2em;
+        padding: 8px;
+        background-color: $color_blue_light;
+        top: 120%;
+        font-size: 10px;
+
+        &::after {
+            border-color: transparent transparent $color_blue_light transparent;
+        }
+    }
+}
