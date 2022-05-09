@@ -2,7 +2,34 @@
 @import 'color';
 
 body {
+
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff;
+
+    &:hover {
+        background: #eee;
+    }
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+
+    &:hover {
+        background: #555;
+    }
 }
 
 .tooltip {
@@ -17,6 +44,7 @@ body {
         top: 120%;
         padding: 2px;
         border-radius: 4px;
+
         &::after {
             content: "";
             position: absolute;
@@ -34,4 +62,29 @@ body {
             visibility: visible;
         }
     }
+}
+
+.virtual-background {
+    z-index: 9999999999999;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

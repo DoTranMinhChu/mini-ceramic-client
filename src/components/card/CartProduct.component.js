@@ -34,9 +34,14 @@ const CartProduct = () => {
 
                             </div>
                         </div>
+                        <div className="card-product-container__hover-footer">
+                            Find Similar
+                        </div>
 
                     </div>
+
                 </div>
+
             </div>
         </>
     )

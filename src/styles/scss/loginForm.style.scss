@@ -1,0 +1,120 @@
+@import 'color';
+
+
+.login-wrapper {
+    border-radius: 5px;
+    background-color: white;
+    padding: 12px 48px 48px 48px;
+
+    .login-container {
+        padding: 32px;
+        height: 100%;
+        width: 100%;
+
+        .login-content {
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            height: 100%;
+            width: 100%;
+
+            .login-header {
+                height: 250px;
+
+                &__logo-box {
+                    height: 200px;
+                    width: 200px;
+                }
+                &__title{
+                    margin-top: 36px;
+                    font-size: 32px;
+                    font-weight: 600;
+                    color: $color_blue_green_light;
+                }
+            }
+
+
+            .login-body {
+                margin-top: 24px;
+                padding: 12px;
+
+                .login-form {
+
+                    &__input {
+                        border-radius: 100px;
+                        margin: 12px;
+                        padding: 2px 8px;
+                        display: flex;
+                        align-items: center;
+
+                        width: 300px;
+
+                        background-color: $color_black_dark_opacity;
+
+                        position: relative;
+
+                        &-item {
+                            font-size: 18px;
+                            padding: 12px 16px;
+                            height: 100%;
+                            width: 100%;
+                            background-color: transparent;
+
+
+                        }
+
+                        &-symbol {
+                            padding: 12px;
+                            font-size: 18px;
+                        }
+
+                        &:hover {
+                            .login-form__input-symbol {
+                                color: $color_blue_green_light;
+                                transform: scale(1.2);
+                            }
+                        }
+                    }
+
+                    &__button {
+                        cursor: pointer;
+
+                        margin: 12px 8px;
+                        padding: 12px 48px;
+                        border-radius: 100px;
+
+                        font-size: 18px;
+                        font-weight: 600;
+
+                        background-color: $color_blue_green_light;
+                        color: white;
+
+                        &:hover {
+                            background-color: $color_blue_green_light_opacity;
+                        }
+
+                    }
+                }
+
+            }
+
+            .login-footer {
+                &__message {
+                    margin-right: 8px;
+                }
+
+                &__btn-signup {
+                    cursor: pointer;
+                    font-weight: 500;
+                    color: $color_blue_green_light;
+
+                    &:hover {
+                        color: $color_blue_green_light_opacity;
+                    }
+                }
+            }
+        }
+    }
+}

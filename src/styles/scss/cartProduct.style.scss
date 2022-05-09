@@ -9,14 +9,16 @@
         padding: 16px;
 
         width: 100%;
-        height: 440px;
+        height: 450px;
 
         &__inner {
-            cursor: pointer;
+            position: relative;
+
+
 
             transition: all 0.2s;
 
-            border: 2px solid $color_pink_dark;
+            box-shadow: 1px 1px 12px $color_pink_dark_opacity;
             padding: 18px;
 
             height: 100%;
@@ -32,7 +34,7 @@
                 justify-content: space-between;
                 height: 40%;
                 width: 100%;
-                padding: 12px 2px;
+                padding: 24px 2px;
 
 
                 &__name-product-group {
@@ -52,8 +54,8 @@
                 }
 
                 &__price-product-group {
-                    font-size: 18px;
-                    font-weight: 500;
+                    font-size: 20px;
+                    font-weight: 600;
                     margin-bottom: 22px;
                 }
 
@@ -81,9 +83,37 @@
                 }
             }
 
-            &:hover{
-                transform: translateY(-0.5%);
+            &:hover {
+                transform: translateY(-2%);
             }
+        }
+
+        &__hover-footer {
+            cursor: pointer;
+
+            position: absolute;
+            visibility: hidden;
+
+            text-align: center;
+
+            top: 100%;
+            left: 0px;
+            right: 0px;
+
+            padding: 10px;
+
+
+            background-color: $color_pink_dark;
+
+            &:hover {
+                background-color: $color_pink_dark_opacity;
+            }
+        }
+
+        &:hover &__hover-footer {
+            visibility: visible;
+            left: -2px;
+            right: -2px;
         }
     }
 
