@@ -3,11 +3,13 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 
 import logo from '../../assets/images/logo.png'
 import '../../styles/scss/loginForm.style.scss'
-function LoginForm() {
+
+function LoginForm(props) {
+
     return (
         <>
-            <div className='virtual-background flex-center'>
-                <div className='login-wrapper'>
+            <div onClick={() =>   props.handleCloseForm()} className='virtual-background flex-center'>
+                <div className='login-wrapper' onClick={(event)=>event.stopPropagation()}>
                     <div className='login-container'>
                         <div className='login-content '>
                             <div className='login-header flex-col-center'>

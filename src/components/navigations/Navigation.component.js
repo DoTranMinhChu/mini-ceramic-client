@@ -1,26 +1,41 @@
 import { useState, useEffect } from 'react'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import LoginSignupPage from '../../views/login/LoginSignupPage.view'
+
 import logo from '../../assets/images/logo.png';
 import '../../styles/scss/navigation.style.scss'
+
+
 const Navigation = () => {
+    const [loginVisibale, setLoginVisibale] = useState(false)
+    const [signupFormVisibale, setSignupFormVisibale] = useState(false)
     const [y, setY] = useState(window.scrollY);
     const handleNavigation = (e) => {
         const window = e.currentTarget;
-        console.log(window.scrollY)
-
         setY(window.scrollY);
     };
 
+    const handleCloseLoginSignup = ()=>{
+        setLoginVisibale(false)
+        setSignupFormVisibale(false)
+    }
+    const handleOpenSignUp = () => {
+        setLoginVisibale(loginVisibale?false:true)
+    }
+    const handleOpenLogin = () => {
+       
+        setSignupFormVisibale(signupFormVisibale?false:true)
+    }
+    
     useEffect(() => {
         window.addEventListener('scroll', (e) => handleNavigation(e))
     })
 
     return (
         <>
-            <nav className={"navigation-bar "+ (y > 100 ? "active" : "")}>
-                <div className={"navigation-bar-top "+ (y > 100 ? "active" : "")}>
+            <nav className={"navigation-bar " + (y > 100 ? "active" : "")}>
+                <div className={"navigation-bar-top " + (y > 100 ? "active" : "")}>
                     <div className="navigation-bar-top__elements">
                         <div className="navigation-bar-top__items">
                             Catalog
@@ -33,15 +48,15 @@ const Navigation = () => {
                         </div>
                     </div>
                     <div className="navigation-bar-top__user-box">
-                        <div className="navigation-bar-top__items navigation-bar-top__items--signup">
+                        <div onClick={() => handleOpenSignUp()} className="navigation-bar-top__items navigation-bar-top__items--signup">
                             Sign up
                         </div>
-                        <div className="navigation-bar-top__items navigation-bar-top__items--login">
+                        <div onClick={() => handleOpenLogin()} className="navigation-bar-top__items navigation-bar-top__items--login">
                             Login
                         </div>
                     </div>
                 </div>
-                <div className={"navigation-bar-container "+ (y > 100 ? "active" : "")}>
+                <div className={"navigation-bar-container " + (y > 100 ? "active" : "")}>
                     <div className="navigation-bar-container__logo-box">
                         <img src={logo} alt="logo" className="navigation-bar-container__logo-image" />
                     </div>
@@ -70,6 +85,7 @@ const Navigation = () => {
                 </div>
 
             </nav>
+            <LoginSignupPage handleCloseLoginSignup={()=>handleCloseLoginSignup()} loginVisibale={loginVisibale} signupFormVisibale={signupFormVisibale} />
         </>
     )
 }

@@ -16,7 +16,7 @@ const CartProduct = () => {
                                 <div className="card-product-action-box__name-product">
                                     Mil ceramic mug Mil ceramic mug Mil ceramic mug
                                 </div>
-                                <span class="tooltip-text">Mil ceramic mug Mil ceramic mug Mil ceramic mug | 10.00$</span>
+                                <span className="tooltip-text">Mil ceramic mug Mil ceramic mug Mil ceramic mug | 10.00$</span>
                             </div>
                             <div className="card-product-action-box__price-product-group">
                                 <div className="card-product-action-box__price-product">
