@@ -16,18 +16,18 @@ const Navigation = () => {
         setY(window.scrollY);
     };
 
-    const handleCloseLoginSignup = ()=>{
+    const handleCloseLoginSignup = () => {
         setLoginVisibale(false)
         setSignupFormVisibale(false)
     }
     const handleOpenSignUp = () => {
-        setLoginVisibale(loginVisibale?false:true)
+        setLoginVisibale(loginVisibale ? false : true)
     }
     const handleOpenLogin = () => {
-       
-        setSignupFormVisibale(signupFormVisibale?false:true)
+
+        setSignupFormVisibale(signupFormVisibale ? false : true)
     }
-    
+
     useEffect(() => {
         window.addEventListener('scroll', (e) => handleNavigation(e))
     })
@@ -80,12 +80,15 @@ const Navigation = () => {
                             <div className="navigation-bar-container__btn-cart">
                                 <FontAwesomeIcon icon={faCartShopping} />
                             </div>
+                            <span className='navigation-bar-container__quatity-cart'>
+                               12
+                            </span>
                         </div>
                     </div>
                 </div>
 
             </nav>
-            <LoginSignupPage handleCloseLoginSignup={()=>handleCloseLoginSignup()} loginVisibale={loginVisibale} signupFormVisibale={signupFormVisibale} />
+            <LoginSignupPage handleCloseLoginSignup={() => handleCloseLoginSignup()} loginVisibale={loginVisibale} signupFormVisibale={signupFormVisibale} />
         </>
     )
 }

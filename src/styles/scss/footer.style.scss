@@ -1,0 +1,43 @@
+@import 'color';
+
+
+
+.footer-wrapper {
+    background-color: $color_pink_dark;
+
+    .footer-body {
+        height: 300px;
+    
+        display: flex;
+        justify-content: space-around;
+
+        &__elements {
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        &__logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            height: 200px;
+            width: 200px;
+        }
+
+        &__descriptions {
+            width: 400px;
+        }
+
+        &__infomation{
+            padding: 12px;
+            font-size: 18px;
+            display: flex;
+            &-title{
+                width: 100px;
+                font-size: 20px;
+                font-weight: 700;
+            }
+        }
+    }
+}
