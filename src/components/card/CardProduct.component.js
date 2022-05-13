@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import '../../styles/scss/cartProduct.style.scss'
+import { useDispatch } from 'react-redux'
+import cartsSlice from '../../redux/slices/cartsSlice'
 
-const CartProduct = (props) => {
+const CardProduct = (props) => {
     const { product } = props
+    const dispatch = useDispatch();
+    const handleAddToCart = () => {
+        dispatch(cartsSlice.actions.addToCart(product))
+    }
     return (
         <>
             <div className="card-product">
@@ -26,7 +32,7 @@ const CartProduct = (props) => {
                             </div>
                             <div className="card-product-action-box__control-btn-group">
 
-                                <div className="card-product-action-box__control-btn-group--cart">
+                                <div className="card-product-action-box__control-btn-group--cart" onClick={() => handleAddToCart()}>
                                     <FontAwesomeIcon icon={faCartArrowDown} />
                                 </div>
                                 <div className="card-product-action-box__control-btn-group--sold">
@@ -48,7 +54,7 @@ const CartProduct = (props) => {
     )
 }
 
-export default CartProduct
+export default CardProduct
 
 
 

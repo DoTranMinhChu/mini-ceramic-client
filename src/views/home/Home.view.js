@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux'
-import { productsSelector } from '../../redux/selectors/productsSelector'
+import { productsSelector,cartsSelector } from '../../redux/selectors/productsSelector'
 
-import CartProduct from '../../components/card/CartProduct.component'
+import CardProduct from '../../components/card/CardProduct.component'
 import background from '../../assets/images/background.jpg'
 function Home() {
 
     const list = useSelector(productsSelector)
-    console.log("Check : ", list)
+    const carts = useSelector(cartsSelector)
+    console.log('cart : ',carts)
+
     return (
         <>
             <div>
@@ -15,7 +17,7 @@ function Home() {
             <div style={{ display: 'flex', flexWrap: 'wrap', padding: '24px', margin: '24px' }}>
 
                 {
-                    (list.map((item) => <CartProduct key={item._id} product={item} />))
+                    (list.map((item) => <CardProduct key={item._id} product={item} />))
                 }
                 
             </div>
