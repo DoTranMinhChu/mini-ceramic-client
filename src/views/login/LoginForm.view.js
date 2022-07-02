@@ -1,15 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
-
 import logo from '../../assets/images/logo.png'
 import '../../styles/scss/loginForm.style.scss'
+import { useState } from 'react'
+import { usersApi } from '../../services/usersApi.service'
+import cookiesUtil from '../../utils/cookies.util'
+import { setLogged } from '../../redux/slices/usersSlice'
+import { useDispatch } from 'react-redux'
 
 function LoginForm(props) {
-
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const handleLogin = () => {
+        usersApi.login({ username, password })
+            .then((res) => {
+                cookiesUtil.setCookie('accessToken', res.data.data.accessToken)
+                cookiesUtil.setCookie('refreshtoken', res.data.data.refreshtoken)
+                dispatch(setLogged(true));
+            }).catch((err) => {
+                console.log('err : ', err)
+            })
+    }
     return (
         <>
-            <div onClick={() =>   props.handleCloseForm()} className='virtual-background flex-center'>
-                <div className='login-wrapper' onClick={(event)=>event.stopPropagation()}>
+            <div onClick={() => props.handleCloseForm()} className='virtual-background flex-center'>
+                <div className='login-wrapper' onClick={(event) => event.stopPropagation()}>
                     <div className='login-container'>
                         <div className='login-content '>
                             <div className='login-header flex-col-center'>
@@ -26,7 +42,14 @@ function LoginForm(props) {
                                         <span className='login-form__input-symbol'>
                                             <FontAwesomeIcon icon={faUser} />
                                         </span>
-                                        <input className='login-form__input-item' type='text' name='username' placeholder='username' />
+                                        <input
+                                            className='login-form__input-item'
+                                            type='text'
+                                            name='username'
+                                            placeholder='username'
+                                            value={username}
+                                            onChange={(event) => setUsername(event.target.value)}
+                                        />
 
                                     </div>
 
@@ -35,18 +58,22 @@ function LoginForm(props) {
                                         <span className='login-form__input-symbol'>
                                             <FontAwesomeIcon icon={faLock} />
                                         </span>
-                                        <input className='login-form__input-item' type='password' name='username' placeholder='password' />
+                                        <input
+                                            className='login-form__input-item'
+                                            type='password'
+                                            name='password'
+                                            placeholder='password'
+                                            value={password}
+                                            onChange={(event) => setPassword(event.target.value)}
+                                        />
 
                                     </div>
 
-                                    <button className='login-form__button'>Login</button>
+                                    <button className='login-form__button' onClick={() => handleLogin()}>Login</button>
 
                                 </div>
                             </div>
-                            <div className='login-footer flex-center'>
-                                <p className='login-footer__message'>Do not have an account ?</p>
-                                <p className='login-footer__btn-signup'>Sigup</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
+@import 'reset';
 @import 'color';
-
+@import 'responsive';
 //========= Navigation component =========
+
 
 
 .navigation-bar {
@@ -21,6 +23,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        &__bar {
+            display: none;
+        }
 
         &__elements,
         &__user-box {
@@ -120,7 +126,10 @@
                 .navigation-bar-container__btn-cart {
 
                     font-size: 34px;
-
+                    color: black;
+                    &:hover {
+                        color: rgba(0, 0, 0, 0.801);
+                    }
                 }
 
                 .navigation-bar-container__quatity-cart {
@@ -159,7 +168,7 @@
 }
 
 .navigation-bar.active {
-    box-shadow: 0px 4px 48px $color_black_light;
+    box-shadow: 0px 2px 24px $color_black_light;
 
     .navigation-bar-top {
         background-color: white;

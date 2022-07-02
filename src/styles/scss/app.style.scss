@@ -1,11 +1,17 @@
 @import 'reset';
 @import 'color';
+@import 'responsive';
 
 body {
 
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
-
+.container{
+    margin: 36px 24px;
+}
+.margin-top{
+    margin-top: 200px;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -31,6 +37,7 @@ body {
         background: #555;
     }
 }
+
 
 .tooltip {
     cursor: pointer;

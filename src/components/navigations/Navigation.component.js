@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
 import LoginSignupPage from '../../views/login/LoginSignupPage.view'
 
 import logo from '../../assets/images/logo.png';
 import '../../styles/scss/navigation.style.scss'
+import { NavLink } from "react-router-dom"
 
 
-const Navigation = () => {
+const Navigation = ({ cart, information, displayAll, navigationAlwayActive }) => {
     const [loginVisibale, setLoginVisibale] = useState(false)
     const [signupFormVisibale, setSignupFormVisibale] = useState(false)
+    const [navigationActive, setNavigationActive] = useState(navigationAlwayActive);
     const [y, setY] = useState(window.scrollY);
+    const cartSize = cart?.length;
     const handleNavigation = (e) => {
         const window = e.currentTarget;
+        if (!navigationAlwayActive) {
+            if (y > 100 && !navigationActive) setNavigationActive(true);
+            if (y < 100 && navigationActive) setNavigationActive(false);
+        }
+
         setY(window.scrollY);
     };
 
@@ -21,11 +29,10 @@ const Navigation = () => {
         setSignupFormVisibale(false)
     }
     const handleOpenSignUp = () => {
-        setLoginVisibale(loginVisibale ? false : true)
+        setSignupFormVisibale(signupFormVisibale ? false : true)
     }
     const handleOpenLogin = () => {
-
-        setSignupFormVisibale(signupFormVisibale ? false : true)
+        setLoginVisibale(loginVisibale ? false : true)
     }
 
     useEffect(() => {
@@ -34,8 +41,11 @@ const Navigation = () => {
 
     return (
         <>
-            <nav className={"navigation-bar " + (y > 100 ? "active" : "")}>
-                <div className={"navigation-bar-top " + (y > 100 ? "active" : "")}>
+            <nav className={"navigation-bar " + (navigationActive ? "active" : "")}>
+                <div className={"navigation-bar-top " + (navigationActive ? "active" : "")}>
+                    <div className="navigation-bar-top__bar" >
+                        <FontAwesomeIcon icon={faBars} />
+                    </div>
                     <div className="navigation-bar-top__elements">
                         <div className="navigation-bar-top__items">
                             Catalog
@@ -48,44 +58,67 @@ const Navigation = () => {
                         </div>
                     </div>
                     <div className="navigation-bar-top__user-box">
-                        <div onClick={() => handleOpenSignUp()} className="navigation-bar-top__items navigation-bar-top__items--signup">
-                            Sign up
-                        </div>
-                        <div onClick={() => handleOpenLogin()} className="navigation-bar-top__items navigation-bar-top__items--login">
-                            Login
-                        </div>
+                        {information ?
+                            <>
+                                <div className="navigation-bar-top__items navigation-bar-top__items--signup">
+                                    Balance : {information.balance}
+                                </div>
+                                <div className="navigation-bar-top__items navigation-bar-top__items--login">
+                                    {information.fullName}
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div onClick={() => handleOpenSignUp()} className="navigation-bar-top__items navigation-bar-top__items--signup">
+                                    Sign up
+                                </div>
+                                <div onClick={() => handleOpenLogin()} className="navigation-bar-top__items navigation-bar-top__items--login">
+                                    Login
+                                </div>
+                            </>
+                        }
+
                     </div>
                 </div>
-                <div className={"navigation-bar-container " + (y > 100 ? "active" : "")}>
-                    <div className="navigation-bar-container__logo-box">
-                        <img src={logo} alt="logo" className="navigation-bar-container__logo-image" />
-                    </div>
+                {
+                    displayAll ?
+                        <div className={`navigation-bar-container ${navigationActive ? 'active' : ''} `}>
+                            <NavLink to="/" className="navigation-bar-container__logo-box">
+                                <img src={logo} alt="logo" className="navigation-bar-container__logo-image" />
+                            </NavLink>
 
-                    <div className="navigation-bar-container__search-box">
-                        <div className="navigation-bar-container__search-box-inner">
-                            <div className="navigation-bar-container__form">
-                                <div className="navigation-bar-container__form-inner">
-                                    <input type="text" className="navigation-bar-container__input" placeholder=" Type to search..." />
+
+                            <div className="navigation-bar-container__search-box">
+                                <div className="navigation-bar-container__search-box-inner">
+                                    <div className="navigation-bar-container__form">
+                                        <div className="navigation-bar-container__form-inner">
+                                            <input type="text" className="navigation-bar-container__input" placeholder=" Type to search..." />
+                                        </div>
+                                        <div className="navigation-bar-container__btn-search">
+                                            <FontAwesomeIcon icon={faSearch} />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="navigation-bar-container__btn-search">
-                                    <FontAwesomeIcon icon={faSearch} />
+                            </div>
+
+
+                            <div className="navigation-bar-container__cart-drawer">
+                                <div className="navigation-bar-container__cart-drawer-inner">
+
+                                    <NavLink to="cart" className="navigation-bar-container__btn-cart">
+                                        <FontAwesomeIcon icon={faCartShopping} />
+                                    </NavLink>
+
+                                    <span className={`navigation-bar-container__quatity-cart ${cartSize ? 'active' : ''}`}>
+                                        {cartSize}
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        :
+                        <></>
+                }
 
-
-                    <div className="navigation-bar-container__cart-drawer">
-                        <div className="navigation-bar-container__cart-drawer-inner">
-                            <div className="navigation-bar-container__btn-cart">
-                                <FontAwesomeIcon icon={faCartShopping} />
-                            </div>
-                            <span className='navigation-bar-container__quatity-cart'>
-                               12
-                            </span>
-                        </div>
-                    </div>
-                </div>
 
             </nav>
             <LoginSignupPage handleCloseLoginSignup={() => handleCloseLoginSignup()} loginVisibale={loginVisibale} signupFormVisibale={signupFormVisibale} />

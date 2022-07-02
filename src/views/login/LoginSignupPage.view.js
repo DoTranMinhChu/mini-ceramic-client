@@ -1,17 +1,17 @@
 import LoginForm from './LoginForm.view'
 import SignupForm from './SignupForm.views'
 
-function LoginRegisterPage(props) {
-    const handleCloseForm = ()=>{
-        props.handleCloseLoginSignup()
+function LoginRegisterPage({ loginVisibale, signupFormVisibale, handleCloseLoginSignup }) {
+    const handleCloseForm = () => {
+        handleCloseLoginSignup()
     }
 
- 
+
     return (
         <>
-            {props.loginVisibale && <LoginForm handleCloseForm={handleCloseForm}/>}
+            {loginVisibale && <LoginForm handleCloseForm={handleCloseForm} />}
 
-            {props.signupFormVisibale && <SignupForm handleCloseForm={handleCloseForm}/>}
+            {signupFormVisibale && <SignupForm handleCloseForm={handleCloseForm} />}
         </>
     )
 }

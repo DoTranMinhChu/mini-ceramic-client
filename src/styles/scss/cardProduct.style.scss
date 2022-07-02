@@ -1,26 +1,25 @@
 @import 'color';
+@import 'responsive';
 
 //========= Cart Product component =========
-
+.cart-list{
+    display: flex;
+    flex-wrap: wrap;
+}
 .card-product {
     width: 20%;
 
     &-container {
-        padding: 16px;
-
+        padding: 12px;
         width: 100%;
-        height: 450px;
+        height: 420px;
 
         &__inner {
+            border-radius: 4px;
             position: relative;
-
-
-
             transition: all 0.2s;
-
             box-shadow: 1px 1px 12px $color_pink_dark_opacity;
-            padding: 18px;
-
+            padding: 12px;
             height: 100%;
 
             .card-product-img-box {
@@ -29,24 +28,23 @@
             }
 
             .card-product-action-box {
-       
-           
-               
+                color: $color_text_card;
+
                 height: 40%;
                 width: 100%;
                 padding: 24px 2px;
 
 
                 &__name-product-group {
-                    font-size: 16px;
-                    font-weight: 500;
+                    font-size: 20px;
+                    font-weight: 600;
 
                     height: 40px;
 
                     margin-bottom: 12px;
 
                     .card-product-action-box__name-product {
-                       
+
                         text-overflow: ellipsis;
                         overflow: hidden;
                         display: -webkit-box !important;
@@ -92,6 +90,7 @@
         }
 
         &__hover-footer {
+
             cursor: pointer;
 
             position: absolute;
@@ -100,6 +99,7 @@
             text-align: center;
 
             top: 100%;
+
             left: 0px;
             right: 0px;
 

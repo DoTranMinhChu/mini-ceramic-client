@@ -8,8 +8,8 @@ function SignupForm(props) {
 
     return (
         <>
-            <div onClick={() =>   props.handleCloseForm()} className='virtual-background flex-center'>
-                <div className='login-wrapper' onClick={(event)=>event.stopPropagation()}>
+            <div onClick={() => props.handleCloseForm()} className='virtual-background flex-center'>
+                <div className='login-wrapper' onClick={(event) => event.stopPropagation()}>
                     <div className='login-container'>
                         <div className='login-content '>
                             <div className='login-header flex-col-center'>
@@ -26,7 +26,15 @@ function SignupForm(props) {
                                         <span className='login-form__input-symbol'>
                                             <FontAwesomeIcon icon={faUser} />
                                         </span>
-                                        <input className='login-form__input-item' type='text' name='username' placeholder='username' />
+                                        <input className='login-form__input-item' type='text' name='fullname' placeholder='Fullname' />
+
+                                    </div>
+
+                                    <div className='login-form__input'>
+                                        <span className='login-form__input-symbol'>
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                        <input className='login-form__input-item' type='text' name='username' placeholder='UserName' />
 
                                     </div>
 
@@ -35,17 +43,13 @@ function SignupForm(props) {
                                         <span className='login-form__input-symbol'>
                                             <FontAwesomeIcon icon={faLock} />
                                         </span>
-                                        <input className='login-form__input-item' type='password' name='username' placeholder='password' />
+                                        <input className='login-form__input-item' type='password' name='password' placeholder='password' />
 
                                     </div>
 
-                                    <button className='login-form__button'>Login</button>
+                                    <button className='login-form__button'>Sigup</button>
 
                                 </div>
-                            </div>
-                            <div className='login-footer flex-center'>
-                                <p className='login-footer__message'>Do not have an account ?</p>
-                                <p className='login-footer__btn-signup'>Sigup</p>
                             </div>
                         </div>
                     </div>
