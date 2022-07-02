@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+
 import CartCard from '../../components/cart/CartCard'
 import CartCheckout from '../../components/cart/CartCheckout'
 import '../../styles/scss/cart.style.scss'
@@ -25,7 +24,6 @@ function Cart({ cartsList, header, footer }) {
                             total = subTotal + shipping;
                             return (
                                 <CartCard key={product.id} productInfomation={product} />
-
                             )
                         })}
 
@@ -33,6 +31,7 @@ function Cart({ cartsList, header, footer }) {
                     </div>
                     <div className="cart__checkout">
                         <CartCheckout
+                            total={total}
                             subTotal={subTotal}
                             shipping={shipping}
                             itemNumber={itemNumber} />
