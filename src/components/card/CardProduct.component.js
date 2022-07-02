@@ -1,14 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import '../../styles/scss/cardProduct.style.scss'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/slices/cartsSlice'
-
+import {getCartsSelector} from '../../redux/selectors/cartSelector'
 const CardProduct = (props) => {
     const { product } = props
     const dispatch = useDispatch();
+    const carts = useSelector(getCartsSelector)
     const handleAddToCart = () => {
         dispatch(addToCart(product))
+        console.log(carts)
     }
     return (
         <>

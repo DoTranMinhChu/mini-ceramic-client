@@ -6,17 +6,57 @@ $color_shadow_card: rgba(154, 154, 154, 0.44);
 
 .cart {
     display: flex;
+    flex-direction: column;
     width: 100%;
 
-    &__cart-list{
-        width: 60%;
-    }
-    &__checkout {
-        width: 40%;
-    }
+    // &__cart-list{
+    //     width: 60%;
+    // }
+    // &__checkout {
+    //     width: 40%;
+    // }
 
 }
 
+.cart-shop-outer {
+    margin: 16px 48px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 2px $color_shadow_card;
+
+    .cart-shop {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            box-shadow: 0px 2px 0px 0px $color_shadow_card;
+
+            &-name {
+                font-size: 24px;
+            }
+
+            &-order-btn {
+                cursor: pointer;
+                padding: 8px 16px;
+                font-size: 18px;
+                font-weight: 600;
+                background-color: $main_light_color;
+                color: $opposite_color;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: $color_shadow_card;
+                    color: $main_color;
+                }
+            }
+        }
+    }
+}
 
 .cart-card {
     display: flex;

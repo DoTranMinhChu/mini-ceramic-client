@@ -4,31 +4,92 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartsSlice = createSlice({
     name: 'cartList',
     initialState: [
-        // {product:... , quantity: ...}
+        /*
+        {
+            shop:....,
+            products:[
+                {
+                    product:...,
+                    quantity:...
+                },
+                {
+                    product:...,
+                    quantity:...
+                }
+            ]
+        },
+        {
+            shop:....,
+            products:[
+                {
+                    product:...,
+                    quantity:...
+                },
+                {
+                    product:...,
+                    quantity:...
+                }
+            ]
+        }
+        */
+
     ]
     ,
     reducers: {
         addToCart: (state, action) => {
-            const newProduct = action.payload;
-            const prevProduct = state.filter((item) => item.product.id === newProduct.id);
-            if (prevProduct.length > 0) {
-                const index = state.findIndex((item) => item.product.id === newProduct.id);
-                state[index].quantity = state[index].quantity + 1;
-            } else {
-                state.push({ product: action.payload, quantity: 1 })
+            const { payload } = action;
+            const product = payload;
+            const shop = payload.shop;
+            const indexShop = state.findIndex((item) => item.shop.id === shop.id);
+            if (indexShop < 0) {
+                state.push({
+                    shop: shop,
+                    products: [
+                        {
+                            product: product,
+                            quantity: 1
+                        }
+                    ]
+                })
+                return;
             }
+            const listProductInShop = state[indexShop].products;
+            const indexProductInShop = listProductInShop.findIndex((item) => item.product.id === product.id);
+            if (indexProductInShop < 0) {
+                state[indexShop].products.push({
+                    product: product,
+                    quantity: 1
+                })
+                return;
+            }
+            state[indexShop].products[indexProductInShop].quantity += 1;
+
 
         },
         removeToCart: (state, action) => {
-            const removeProduct = action.payload;
-            const index = state.findIndex((item) => item.product.id === removeProduct.id);
-            state.splice(index, 1);
+            const product = action.payload;
+            const shop = product.shop;
+            const indexShop = state.findIndex((item) => item.shop.id === shop.id);
+            const listProductInShop = state[indexShop].products;
+            const indexProductInShop = listProductInShop.findIndex((item) => item.product.id === product.id);
+            state[indexShop].products.splice(indexProductInShop, 1);
+            if (state[indexShop].products.length <= 0) {
+                state.splice(indexShop, 1);
+            }
         },
         changeQuantityProductInCart: (state, action) => {
             const { product, change } = action.payload;
-            const index = state.findIndex((item) => item.product.id === product.id);
-            state[index].quantity += change;
-            if (state[index].quantity <= 0) state.splice(index, 1);
+            const shop = product.shop;
+            const indexShop = state.findIndex((item) => item.shop.id === shop.id);
+            const listProductInShop = state[indexShop].products;
+            const indexProductInShop = listProductInShop.findIndex((item) => item.product.id === product.id);
+            state[indexShop].products[indexProductInShop].quantity += change;
+            if (state[indexShop].products[indexProductInShop].quantity <= 0) {
+                state[indexShop].products.splice(indexProductInShop, 1);
+            }
+            if (state[indexShop].products.length <= 0) {
+                state.splice(indexShop, 1);
+            }
         }
     }
 })

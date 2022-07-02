@@ -6,6 +6,8 @@ import LoginSignupPage from '../../views/login/LoginSignupPage.view'
 import logo from '../../assets/images/logo.png';
 import '../../styles/scss/navigation.style.scss'
 import { NavLink } from "react-router-dom"
+import { getTotalProductQuantity } from '../../redux/selectors/cartSelector';
+import { useSelector } from 'react-redux';
 
 
 const Navigation = ({ cart, information, displayAll, navigationAlwayActive }) => {
@@ -13,7 +15,7 @@ const Navigation = ({ cart, information, displayAll, navigationAlwayActive }) =>
     const [signupFormVisibale, setSignupFormVisibale] = useState(false)
     const [navigationActive, setNavigationActive] = useState(navigationAlwayActive);
     const [y, setY] = useState(window.scrollY);
-    const cartSize = cart?.length;
+    const cartSize = useSelector(getTotalProductQuantity);
     const handleNavigation = (e) => {
         const window = e.currentTarget;
         if (!navigationAlwayActive) {
@@ -105,7 +107,7 @@ const Navigation = ({ cart, information, displayAll, navigationAlwayActive }) =>
                             <div className="navigation-bar-container__cart-drawer">
                                 <div className="navigation-bar-container__cart-drawer-inner">
 
-                                    <NavLink to="cart" className="navigation-bar-container__btn-cart">
+                                    <NavLink to="/cart" className="navigation-bar-container__btn-cart">
                                         <FontAwesomeIcon icon={faCartShopping} />
                                     </NavLink>
 
