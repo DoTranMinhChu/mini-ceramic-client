@@ -1,9 +1,17 @@
-import {createSelector } from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
 
-export const getUser = (state) => state.user
+const getInfomation = (state) => state.user.information
 
 
-export const getUserSelector = createSelector(getUser, (getUser) => {
-    return getUser;
+export const getInfomationSelector = createSelector(getInfomation, (getInfomation) => {
+    return getInfomation;
 })
+
+const getLogged = (state) => state.user.logged
+
+
+export const getLoggedSelector = createSelector(getLogged, (getLogged) => {
+    return getLogged;
+})
+
 

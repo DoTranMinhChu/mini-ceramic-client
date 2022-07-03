@@ -5,22 +5,37 @@ import '../../styles/scss/loginForm.style.scss'
 import { useState } from 'react'
 import { usersApi } from '../../services/usersApi.service'
 import cookiesUtil from '../../utils/cookies.util'
-import { setLogged } from '../../redux/slices/usersSlice'
-import { useDispatch } from 'react-redux'
+import { setInformation, setLogged } from '../../redux/slices/usersSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { getLoggedSelector, getUserSelector } from '../../redux/selectors/userSelector'
 
 function LoginForm(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const logged = useSelector(getLoggedSelector);
     const dispatch = useDispatch();
     const handleLogin = () => {
         usersApi.login({ username, password })
             .then((res) => {
                 cookiesUtil.setCookie('accessToken', res.data.data.accessToken)
-                cookiesUtil.setCookie('refreshtoken', res.data.data.refreshtoken)
-                dispatch(setLogged(true));
+                cookiesUtil.setCookie('refreshToken', res.data.data.refreshToken)
+                const token = cookiesUtil.getCookie('accessToken');
+                if (token) {
+                    usersApi.information(token)
+                        .then(res => {
+                            dispatch(setLogged(true));
+                            dispatch(setInformation(res.data))
+                        })
+                        .catch(err => {
+                            dispatch(setInformation(null))
+                        })
+                }
+
+                props.handleCloseForm();
             }).catch((err) => {
                 console.log('err : ', err)
             })
+
     }
     return (
         <>

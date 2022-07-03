@@ -4,16 +4,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const usersSlice = createSlice({
     name: 'usersSlice',
     initialState: {
-        information: null,
-        logged: false,
     }
     ,
     reducers: {
         setInformation: (state, action) => {
-            state.information = action.payload.data;
+            state.information = action.payload;
         },
         setLogged: (state, action) => {
-            state.logged = action.payload.data;
+            state.logged = action.payload;
         },
     }
 })

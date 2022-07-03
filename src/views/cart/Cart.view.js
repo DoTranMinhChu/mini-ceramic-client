@@ -4,7 +4,6 @@ import '../../styles/scss/cart.style.scss'
 
 function Cart({ cartsList, header, footer }) {
 
-    console.log(cartsList)
     return (
         <>
             {header}

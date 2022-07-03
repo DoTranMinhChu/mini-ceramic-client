@@ -8,7 +8,6 @@ function CartCheckout(props) {
     const handleCheckout = () => {
         if (Object.keys(auth.user).length === 0) {
             const btnLogin = document.getElementById("btn-login");
-            console.log(btnLogin)
             btnLogin.click();
 
             // toast.warn("Need to login to checkout")

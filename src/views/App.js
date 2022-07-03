@@ -4,7 +4,7 @@ import Navigation from "../components/navigations/Navigation.component";
 import Home from "./home/Home.view";
 import Footer from '../components/footers/Footer.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserSelector } from '../redux/selectors/userSelector';
+import { getLoggedSelector } from '../redux/selectors/userSelector';
 import { useEffect } from 'react';
 import { usersApi } from '../services/usersApi.service';
 import { setInformation, setLogged } from '../redux/slices/usersSlice';
@@ -13,22 +13,20 @@ import { getCartsSelector } from '../redux/selectors/cartSelector';
 import Cart from './cart/Cart.view';
 
 function App() {
-  const information = useSelector(getUserSelector)?.information;
-  const logged = useSelector(getUserSelector)?.logged;
+  const logged = useSelector(getLoggedSelector);
   const cart = useSelector(getCartsSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     const token = cookiesUtil.getCookie('accessToken');
-    if (logged || token) {
+    if (!logged && token) {
       usersApi.information(token)
         .then(res => {
           dispatch(setLogged(true));
-          dispatch(setInformation(res.data))
+          dispatch(setInformation(res.data.data))
         })
         .catch(err => {
           dispatch(setInformation(null))
         })
-
     }
   }
   )
@@ -44,7 +42,6 @@ function App() {
               header={
                 <Navigation
                   cart={cart}
-                  information={information}
                   displayAll={true}
                 />
               }
@@ -62,7 +59,6 @@ function App() {
               header={
                 <Navigation
                   cart={cart}
-                  information={information}
                   displayAll={true}
                   navigationAlwayActive={true}
                 />

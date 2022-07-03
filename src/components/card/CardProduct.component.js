@@ -10,7 +10,6 @@ const CardProduct = (props) => {
     const carts = useSelector(getCartsSelector)
     const handleAddToCart = () => {
         dispatch(addToCart(product))
-        console.log(carts)
     }
     return (
         <>
