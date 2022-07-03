@@ -6,13 +6,11 @@ import { useState } from 'react'
 import { usersApi } from '../../services/usersApi.service'
 import cookiesUtil from '../../utils/cookies.util'
 import { setInformation, setLogged } from '../../redux/slices/usersSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { getLoggedSelector, getUserSelector } from '../../redux/selectors/userSelector'
+import { useDispatch } from 'react-redux';
 
 function LoginForm(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const logged = useSelector(getLoggedSelector);
     const dispatch = useDispatch();
     const handleLogin = () => {
         usersApi.login({ username, password })
@@ -24,7 +22,7 @@ function LoginForm(props) {
                     usersApi.information(token)
                         .then(res => {
                             dispatch(setLogged(true));
-                            dispatch(setInformation(res.data))
+                            dispatch(setInformation(res.data.data))
                         })
                         .catch(err => {
                             dispatch(setInformation(null))

@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const cartsSlice = createSlice({
     name: 'cartList',
     initialState: [
         /*
-        {
+        {   
             shop:....,
             products:[
                 {
@@ -43,6 +44,7 @@ const cartsSlice = createSlice({
             const indexShop = state.findIndex((item) => item.shop.id === shop.id);
             if (indexShop < 0) {
                 state.push({
+                    id: uuidv4(),
                     shop: shop,
                     products: [
                         {
@@ -76,6 +78,7 @@ const cartsSlice = createSlice({
             if (state[indexShop].products.length <= 0) {
                 state.splice(indexShop, 1);
             }
+
         },
         changeQuantityProductInCart: (state, action) => {
             const { product, change } = action.payload;
@@ -90,7 +93,10 @@ const cartsSlice = createSlice({
             if (state[indexShop].products.length <= 0) {
                 state.splice(indexShop, 1);
             }
-        }
+
+        },
+     
+
     }
 })
 

@@ -127,9 +127,10 @@
                 .navigation-bar-container__btn-cart {
 
                     font-size: 34px;
-                    color: black;
+                    color: $color_blue_green_dark;
+
                     &:hover {
-                        color: rgba(0, 0, 0, 0.801);
+                        color: $color_blue_green_light;
                     }
                 }
 
@@ -142,10 +143,10 @@
                     align-items: center;
                     justify-content: center;
 
-                    background: #171717;
-                    color: #fff;
+                    background: $color_blue_green_dark;
+                    color: $color_white;
 
-                    border: 1px solid #303846;
+                    border: 1px solid $color_blue_green_dark;
                     border-radius: 60px;
 
                     line-height: 1;
@@ -172,12 +173,12 @@
     box-shadow: 0px 2px 24px $color_black_light;
 
     .navigation-bar-top {
-        background-color: white;
+        background-color: $color_white;
 
     }
 
     .navigation-bar-container {
-        background-color: white;
+        background-color: $color_white;
     }
 
 }

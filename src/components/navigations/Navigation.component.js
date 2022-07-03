@@ -74,12 +74,19 @@ const Navigation = ({ cart, displayAll, navigationAlwayActive }) => {
                         <NavLink to="/" className="navigation-bar-top__items">
                             Home
                         </NavLink>
-                        <NavLink to="/order" className="navigation-bar-top__items">
-                            Your Order
-                        </NavLink>
-                        <NavLink to="/shop" className="navigation-bar-top__items">
-                            Your Shop
-                        </NavLink>
+                        {
+                            information ?
+                                <>
+                                    <NavLink to="/order" className="navigation-bar-top__items">
+                                        Your Order
+                                    </NavLink>
+                                    <NavLink to="/shop" className="navigation-bar-top__items">
+                                        Your Shop
+                                    </NavLink>
+                                </> :
+                                <></>
+                        }
+
 
 
                     </div>

@@ -8,16 +8,24 @@ import { getLoggedSelector } from '../redux/selectors/userSelector';
 import { useEffect } from 'react';
 import { usersApi } from '../services/usersApi.service';
 import { setInformation, setLogged } from '../redux/slices/usersSlice';
-import cookiesUtil from '../utils/cookies.util'
+import { getCookie } from '../utils/cookies.util'
 import { getCartsSelector } from '../redux/selectors/cartSelector';
 import Cart from './cart/Cart.view';
+import CartOrder from './cart/order/CartOrder.view';
+
+
 
 function App() {
+
   const logged = useSelector(getLoggedSelector);
   const cart = useSelector(getCartsSelector);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const token = cookiesUtil.getCookie('accessToken');
+
+
+    const token = getCookie('accessToken');
     if (!logged && token) {
       usersApi.information(token)
         .then(res => {
@@ -28,8 +36,7 @@ function App() {
           dispatch(setInformation(null))
         })
     }
-  }
-  )
+  })
   return (
     <BrowserRouter>
 
@@ -68,8 +75,27 @@ function App() {
               }
             />}
         />
+        <Route
+          path="/cart/order/:id"
+
+          element={
+            <CartOrder
+             
+              header={
+                <Navigation
+                  cart={cart}
+                  displayAll={true}
+                  navigationAlwayActive={true}
+                />
+              }
+              footer={
+                <Footer />
+              }
+            />}
+        />
 
       </Routes>
+
 
 
     </BrowserRouter>

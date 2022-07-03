@@ -24,9 +24,20 @@ const getCookie = (cname) => {
 const removeCookie = (cname) => {
     document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+const setObjectToCookie = (name, value) => {
+    var cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
+    document.cookie = cookie;
+}
+function getObjectFromCookie(name) {
+    var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    result && (result = JSON.parse(result[1]));
+    return result;
+}
 
 module.exports = {
     setCookie,
     getCookie,
-    removeCookie
+    removeCookie,
+    setObjectToCookie,
+    getObjectFromCookie
 }
