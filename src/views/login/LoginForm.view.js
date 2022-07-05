@@ -7,12 +7,14 @@ import { usersApi } from '../../services/usersApi.service'
 import cookiesUtil from '../../utils/cookies.util'
 import { setInformation, setLogged } from '../../redux/slices/usersSlice'
 import { useDispatch } from 'react-redux';
+import { setLoading } from '../../redux/slices/commonSlice'
 
 function LoginForm(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const handleLogin = () => {
+        dispatch(setLoading(true));
         usersApi.login({ username, password })
             .then((res) => {
                 cookiesUtil.setCookie('accessToken', res.data.data.accessToken)
@@ -33,6 +35,7 @@ function LoginForm(props) {
             }).catch((err) => {
                 console.log('err : ', err)
             })
+        dispatch(setLoading(false));
 
     }
     return (

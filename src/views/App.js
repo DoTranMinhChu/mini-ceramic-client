@@ -12,6 +12,8 @@ import { getCookie } from '../utils/cookies.util'
 import { getCartsSelector } from '../redux/selectors/cartSelector';
 import Cart from './cart/Cart.view';
 import CartOrder from './cart/order/CartOrder.view';
+import LoadingSpinner from '../components/common/LoadingSpinner.component';
+import { getLoadingSelector } from '../redux/selectors/commonSelector';
 
 
 
@@ -19,9 +21,9 @@ function App() {
 
   const logged = useSelector(getLoggedSelector);
   const cart = useSelector(getCartsSelector);
-
+  const loading = useSelector(getLoadingSelector);
   const dispatch = useDispatch();
-
+  console.log('loading :' ,loading)
   useEffect(() => {
 
 
@@ -37,68 +39,68 @@ function App() {
         })
     }
   })
+  console.log('logged : ', logged)
   return (
-    <BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                header={
+                  <Navigation
+                    cart={cart}
+                    displayAll={true}
+                  />
+                }
+                footer={
+                  <Footer />
+                }
+              />}
+          />
+          <Route
+            path="/cart"
 
+            element={
+              <Cart
+                cartsList={cart}
+                header={
+                  <Navigation
+                    cart={cart}
+                    displayAll={true}
+                    navigationAlwayActive={true}
+                  />
+                }
+                footer={
+                  <Footer />
+                }
+              />}
+          />
+          <Route
+            path="/cart/order/:id"
+            element={
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              header={
-                <Navigation
-                  cart={cart}
-                  displayAll={true}
-                />
-              }
-              footer={
-                <Footer />
-              }
-            />}
-        />
-        <Route
-          path="/cart"
+              <CartOrder
+                header={
+                  <Navigation
+                    onLogin={!logged}
+                    cart={cart}
+                    displayAll={true}
+                    navigationAlwayActive={true}
+                  />
+                }
+                footer={
+                  <Footer />
+                }
+              />
+            }
+          />
 
-          element={
-            <Cart
-              cartsList={cart}
-              header={
-                <Navigation
-                  cart={cart}
-                  displayAll={true}
-                  navigationAlwayActive={true}
-                />
-              }
-              footer={
-                <Footer />
-              }
-            />}
-        />
-        <Route
-          path="/cart/order/:id"
-
-          element={
-            <CartOrder
-             
-              header={
-                <Navigation
-                  cart={cart}
-                  displayAll={true}
-                  navigationAlwayActive={true}
-                />
-              }
-              footer={
-                <Footer />
-              }
-            />}
-        />
-
-      </Routes>
-
-
-
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+      <LoadingSpinner loading={loading}/>
+    </>
 
   );
 }

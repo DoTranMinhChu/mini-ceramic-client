@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { getCheckOutByIdSelector } from "../../redux/selectors/cartSelector";
 
-function CartCheckout(props) {
+function CartCheckout({ cartId }) {
 
-    const auth = useSelector(state => state.auth)
-
+    const auth = {}
+    const { total, subTotal, itemNumber, shipping } = useSelector(getCheckOutByIdSelector(cartId, 4.99))
     const handleCheckout = () => {
         if (Object.keys(auth.user).length === 0) {
             const btnLogin = document.getElementById("btn-login");
@@ -15,18 +16,13 @@ function CartCheckout(props) {
 
             // toast.warn("Need to enter phone number and address to checkout")
         } else {
-            props.handleCheckout();
+            // props.handleCheckout();
         }
 
 
     }
+    console.log(total)
 
-
-    let { subTotal, itemNumber, shipping } = props;
-    let total = subTotal + shipping;
-    subTotal = subTotal.toFixed(2);
-    shipping = shipping.toFixed(2);
-    total = total.toFixed(2);
     return (
         <>
             <div className="checkout-box">

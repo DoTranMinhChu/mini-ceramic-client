@@ -1,12 +1,39 @@
-
 @import 'reset';
 @import 'color';
+
+.cart-order {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+
+    &__cart-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 60%;
+    }
+
+    &__checkout {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 40%;
+    }
+}
+
 .cart {
     display: flex;
     flex-direction: column;
     width: 100%;
 
 
+}
+
+.cart-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .cart-shop-outer {
@@ -132,7 +159,7 @@
 }
 
 .checkout-box {
-
+    width: 100%;
     padding: 12px;
     display: flex;
     flex-direction: column;

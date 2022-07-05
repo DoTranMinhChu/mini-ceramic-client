@@ -14,9 +14,9 @@ import { setInformation, setLogged } from '../../redux/slices/usersSlice';
 import { getInfomationSelector } from '../../redux/selectors/userSelector';
 
 
-const Navigation = ({ cart, displayAll, navigationAlwayActive }) => {
-    const [loginVisibale, setLoginVisibale] = useState(false)
-    const [signupFormVisibale, setSignupFormVisibale] = useState(false)
+const Navigation = ({ onLogin,onSignup, displayAll, navigationAlwayActive }) => {
+    const [loginVisibale, setLoginVisibale] = useState(onLogin)
+    const [signupFormVisibale, setSignupFormVisibale] = useState(onSignup)
     const [navigationActive, setNavigationActive] = useState(navigationAlwayActive);
     const [y, setY] = useState(window.scrollY);
     const information = useSelector(getInfomationSelector);
@@ -105,10 +105,10 @@ const Navigation = ({ cart, displayAll, navigationAlwayActive }) => {
                             </>
                             :
                             <>
-                                <div onClick={() => handleOpenSignUp()} className="navigation-bar-top__items navigation-bar-top__items--signup">
+                                <div id="signup" onClick={() => handleOpenSignUp()} className="navigation-bar-top__items navigation-bar-top__items--signup">
                                     Sign up
                                 </div>
-                                <div onClick={() => handleOpenLogin()} className="navigation-bar-top__items navigation-bar-top__items--login">
+                                <div id="login" onClick={() => handleOpenLogin()} className="navigation-bar-top__items navigation-bar-top__items--login">
                                     Login
                                 </div>
                             </>

@@ -7,6 +7,33 @@ export const getCartsSelector = createSelector(carts, (carts) => {
     return carts;
 })
 
+export const getCartByIdSelector = (id) => createSelector(carts, (carts) => {
+    console.log('id : ', id)
+    const index = carts.findIndex((item) => item.id === id)
+    return carts[index];
+})
+
+export const getCheckOutByIdSelector = (id, shipping) => createSelector(carts, (carts) => {
+    console.log('id : ', id)
+    let total = 0
+    let subTotal = 0
+    let itemNumber = 0
+    const index = carts.findIndex((item) => item.id === id)
+    const products = carts[index].products;
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i].product;
+        subTotal += product.price * products[i].quantity;
+        itemNumber += products[i].quantity;
+        total = subTotal + shipping;
+    }
+    return {
+        total: total.toFixed(2),
+        subTotal: subTotal.toFixed(2),
+        itemNumber: itemNumber,
+        shipping: shipping.toFixed(2)
+    }
+})
+
 export const getTotalProduct = createSelector(carts, (carts) => {
     const size = carts.reduce((preValue, cart) => {
         return preValue + cart.products.length
