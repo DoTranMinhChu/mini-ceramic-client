@@ -31,12 +31,11 @@ function CartCheckout({ cartId }) {
                 navigate('/');
             }
         ).catch(err => {
-            console.log('err : ', err)
+            console.log( err)
         })
 
         dispatch(setLoading(false));
     }
-    console.log(total)
 
     return (
         <>

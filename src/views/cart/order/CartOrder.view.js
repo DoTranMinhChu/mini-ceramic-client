@@ -10,7 +10,7 @@ function CartOrder({ header, footer }) {
 
     const { id } = useParams();
     const cartsList = useSelector(getCartByIdSelector(id)).products
-    console.log(cartsList)
+
    
 
     return (

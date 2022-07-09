@@ -16,6 +16,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner.component';
 import { getLoadingSelector } from '../redux/selectors/commonSelector';
 import Order from './order/Order.view';
 import Shop from './shop/Shop.view';
+import OrderDetail from './order/OrderDetail.view';
 
 
 
@@ -25,7 +26,6 @@ function App() {
   const cart = useSelector(getCartsSelector);
   const loading = useSelector(getLoadingSelector);
   const dispatch = useDispatch();
-  console.log('loading :', loading)
   useEffect(() => {
 
 
@@ -41,7 +41,6 @@ function App() {
         })
     }
   })
-  console.log('logged : ', logged)
   return (
     <>
       <BrowserRouter>
@@ -103,6 +102,23 @@ function App() {
 
             element={
               <Order
+                header={
+                  <Navigation
+                    cart={cart}
+                    displayAll={true}
+                    navigationAlwayActive={true}
+                  />
+                }
+                footer={
+                  <Footer />
+                }
+              />}
+          />
+          <Route
+            path="/order/detail/:id"
+
+            element={
+              <OrderDetail
                 header={
                   <Navigation
                     cart={cart}

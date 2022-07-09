@@ -18,7 +18,7 @@ function Home({ header, footer }) {
                     dispatch(setProducts(res.data))
                 })
                 .catch(err => {
-                    console.log('err : ', err)
+                    console.log(err)
                 })
         }
     }

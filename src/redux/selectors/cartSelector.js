@@ -8,7 +8,6 @@ export const getCartsSelector = createSelector(carts, (carts) => {
 })
 
 export const getCartByIdSelector = (id) => createSelector(carts, (carts) => {
-    console.log('id : ', id)
     const index = carts.findIndex((item) => item.id === id)
     return carts[index];
 })

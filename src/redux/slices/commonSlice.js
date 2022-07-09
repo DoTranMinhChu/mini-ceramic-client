@@ -9,7 +9,6 @@ const commonSlice = createSlice({
     ,
     reducers: {
         setLoading: (state, action) => {
-            console.log(action.payload)
             state.loading = action.payload;
         },
 

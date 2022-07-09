@@ -33,7 +33,7 @@ function LoginForm(props) {
 
                 props.handleCloseForm();
             }).catch((err) => {
-                console.log('err : ', err)
+                console.log(err)
             })
         dispatch(setLoading(false));
 
