@@ -1,25 +1,40 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { getCheckOutByIdSelector } from "../../redux/selectors/cartSelector";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartByIdSelector, getCheckOutByIdSelector } from "../../redux/selectors/cartSelector";
+import { removeCartById } from "../../redux/slices/cartsSlice";
+import { ordersApi } from "../../services/ordersApi.service";
+import { useNavigate } from "react-router-dom";
+import { setLoading } from "../../redux/slices/commonSlice";
 function CartCheckout({ cartId }) {
 
-    const auth = {}
-    const { total, subTotal, itemNumber, shipping } = useSelector(getCheckOutByIdSelector(cartId, 4.99))
-    const handleCheckout = () => {
-        if (Object.keys(auth.user).length === 0) {
-            const btnLogin = document.getElementById("btn-login");
-            btnLogin.click();
-
-            // toast.warn("Need to login to checkout")
-        } else if (!(auth.infomation.address || auth.infomation.phoneNumber)) {
-
-            // toast.warn("Need to enter phone number and address to checkout")
-        } else {
-            // props.handleCheckout();
+    const cart = useSelector(getCartByIdSelector(cartId))
+    const { total, subTotal, itemNumber, shipping } = useSelector(getCheckOutByIdSelector(cartId, 4.99));
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    useEffect(()=>{
+        if(!cart){
+            navigate('/cart');
         }
+    })
+    const handleCheckout = async () => {
+        dispatch(setLoading(true));
+        const orders = cart.products.map(item => {
+            return {
+                productId: item.product.id,
+                quantity: item.quantity
+            }
+        })
 
+        await ordersApi.newOrders(orders).then(
+            res => {
+                dispatch(removeCartById({ id: cartId }))
+                navigate('/');
+            }
+        ).catch(err => {
+            console.log('err : ', err)
+        })
 
+        dispatch(setLoading(false));
     }
     console.log(total)
 

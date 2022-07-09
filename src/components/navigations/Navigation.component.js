@@ -12,9 +12,10 @@ import LoginForm from '../../views/login/LoginForm.view';
 import SignupForm from '../../views/login/SignupForm.views';
 import { setInformation, setLogged } from '../../redux/slices/usersSlice';
 import { getInfomationSelector } from '../../redux/selectors/userSelector';
+import { setLoading } from '../../redux/slices/commonSlice';
 
 
-const Navigation = ({ onLogin,onSignup, displayAll, navigationAlwayActive }) => {
+const Navigation = ({ onLogin, onSignup, displayAll, navigationAlwayActive }) => {
     const [loginVisibale, setLoginVisibale] = useState(onLogin)
     const [signupFormVisibale, setSignupFormVisibale] = useState(onSignup)
     const [navigationActive, setNavigationActive] = useState(navigationAlwayActive);
@@ -43,10 +44,11 @@ const Navigation = ({ onLogin,onSignup, displayAll, navigationAlwayActive }) => 
         setLoginVisibale(loginVisibale ? false : true)
     }
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        dispatch(setLoading(true));
         const refreshToken = getCookie('refreshToken');
         const accessToken = getCookie('accessToken');
-        usersApi.logout({ refreshToken, accessToken })
+        await usersApi.logout({ refreshToken, accessToken })
             .then(res => {
                 removeCookie('accessToken');
                 removeCookie('refreshToken');
@@ -56,7 +58,7 @@ const Navigation = ({ onLogin,onSignup, displayAll, navigationAlwayActive }) => 
             .catch(err => {
                 console.log(err)
             })
-
+        dispatch(setLoading(false));
     }
     useEffect(() => {
         window.addEventListener('scroll', (e) => handleNavigation(e))

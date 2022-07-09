@@ -14,7 +14,6 @@ export const getCartByIdSelector = (id) => createSelector(carts, (carts) => {
 })
 
 export const getCheckOutByIdSelector = (id, shipping) => createSelector(carts, (carts) => {
-    console.log('id : ', id)
     let total = 0
     let subTotal = 0
     let itemNumber = 0

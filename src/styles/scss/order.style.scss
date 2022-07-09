@@ -1,0 +1,57 @@
+@import 'color';
+@import 'responsive';
+
+.order-list {
+    padding: 6px 12px;
+
+    &-table {
+        width: 100%;
+
+        * {
+            color: $color_blue_green_dark;
+            text-align: start;
+            padding: 12px 8px;
+        }
+
+        thead {
+            tr {
+                border-bottom: 1px solid $color_blue_green_light_opacity;
+
+                &:hover {
+                    background-color: $color_pink_dark;
+                }
+            }
+
+        }
+
+        tbody {
+            tr {
+                &:hover {
+                    background-color: $color_pink_dark_opacity;
+                }
+            }
+        }
+
+        &__button {
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 24px;
+            &--clickable {
+                background-color: $color_blue_green_light;
+                color: $color_white;
+                &:hover{
+                    background-color: $color_blue_green_light_opacity;
+                }
+            }
+
+            &--unclickable {
+                background-color: $color_blue_light;
+                color: $color_white;
+            }
+        }
+        &__detail{
+            text-decoration: none;
+            
+        }
+    }
+}

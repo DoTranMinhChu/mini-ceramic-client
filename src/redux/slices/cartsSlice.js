@@ -7,6 +7,7 @@ const cartsSlice = createSlice({
     initialState: [
         /*
         {   
+            id:...
             shop:....,
             products:[
                 {
@@ -20,6 +21,7 @@ const cartsSlice = createSlice({
             ]
         },
         {
+            id:...
             shop:....,
             products:[
                 {
@@ -95,11 +97,17 @@ const cartsSlice = createSlice({
             }
 
         },
-     
+        removeCartById: (state, action) => {
+            const { id } = action.payload;
+            console.log('id : ',id)
+            const index = state.findIndex((item) => item.id === id);
+            console.log('index : ',index)
+            state.splice(index,1);
+        }
 
     }
 })
 
 export default cartsSlice.reducer;
-export const { addToCart, removeToCart, changeQuantityProductInCart } = cartsSlice.actions
+export const { addToCart, removeToCart, changeQuantityProductInCart , removeCartById} = cartsSlice.actions
 

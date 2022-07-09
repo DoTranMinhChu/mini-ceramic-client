@@ -13,9 +13,9 @@ function LoginForm(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const handleLogin = () => {
+    const handleLogin = async () => {
         dispatch(setLoading(true));
-        usersApi.login({ username, password })
+        await usersApi.login({ username, password })
             .then((res) => {
                 cookiesUtil.setCookie('accessToken', res.data.data.accessToken)
                 cookiesUtil.setCookie('refreshToken', res.data.data.refreshToken)

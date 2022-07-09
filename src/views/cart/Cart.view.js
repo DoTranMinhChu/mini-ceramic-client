@@ -10,7 +10,14 @@ function Cart({ cartsList, header, footer }) {
 
             <div className='cart-list container margin-top'>
                 <div className="cart" >
-                    {cartsList.map(cart => <CartShop key={cart.shop.id} cart={cart} />)}
+                    {
+                        !cartsList?.length ?
+                            <>
+                                <div className="notification">Cart is empty</div>
+                            </>
+                            :
+                            cartsList.map(cart => <CartShop key={cart.shop.id} cart={cart} />)
+                    }
                 </div >
             </div>
             {footer}
